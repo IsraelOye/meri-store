@@ -1,7 +1,19 @@
 // Query to fetch list of products
 export const PRODUCTS_QUERY = `
-  query GetProducts($first: Int!, $after: String) {
-    products(first: $first, after: $after) {
+  query GetProducts(
+  $first: Int!
+  $after: String
+  $query: String 
+  $sortKey: ProductSortKeys 
+  $reverse: Boolean
+  ) {
+    products(
+    first: $first 
+    after: $after 
+    query: $query 
+    sortKey: $sortKey
+    reverse: $reverse
+    ) {
       edges {
         node {
           id
