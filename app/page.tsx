@@ -1,12 +1,12 @@
 import { getCollections, getProducts } from "@/services/products";
 import { ProductGrid } from "@/components/ui/product/ProductGrid";
-import Link from 'next/link';
+import Link from "next/link";
 import BackButton from "@/components/ui/product/BackButton";
 import { SearchInput } from "@/components/ui/product/SearchInput";
 import { SortSelect } from "@/components/ui/product/SortSelect";
 import { CollectionFilter } from "@/components/ui/product/CollectionFilter";
 import { AvailabilityFilter } from "@/components/ui/product/AvailabilityFilter";
-
+// import { PriceFilter } from "@/components/ui/product/PriceFilter";
 
 interface HomePageProps {
   searchParams: Promise<{
@@ -15,17 +15,21 @@ interface HomePageProps {
     sort?: string;
     collection?: string;
     available?: string;
+    minPrice?: string;
+    maxPrice?: string;
   }>;
 }
 
 export default async function HomePage({ searchParams }: HomePageProps) {
-  const { after, q, sort, collection, available } = await searchParams;
+  const { after, q, sort, collection, available, minPrice, maxPrice } =
+    await searchParams;
 
-  // Build Shopify search syntax by combining every active filter
   const queryParts: string[] = [];
   if (q) queryParts.push(`title:*${q}*`);
   if (collection) queryParts.push(`collection:${collection}`);
   if (available === "true") queryParts.push(`available_for_sale:true`);
+  if (minPrice) queryParts.push(`variants.price:>=${minPrice}`);
+  if (maxPrice) queryParts.push(`variants.price:<=${maxPrice}`);
   const shopifyQuery =
     queryParts.length > 0 ? queryParts.join(" AND ") : undefined;
 
@@ -48,6 +52,8 @@ export default async function HomePage({ searchParams }: HomePageProps) {
     sort && `sort=${sort}`,
     collection && `collection=${collection}`,
     available && `available=${available}`,
+    minPrice && `minPrice=${minPrice}`,
+    maxPrice && `maxPrice=${maxPrice}`,
   ]
     .filter(Boolean)
     .join("&");
@@ -61,6 +67,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
           <SortSelect />
           <CollectionFilter collections={collections} />
           <AvailabilityFilter />
+          {/* <PriceFilter /> */}
         </div>
       </div>
 
