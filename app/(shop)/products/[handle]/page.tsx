@@ -5,6 +5,7 @@ import {
 } from "@/services/products";
 import { ProductGrid } from "@/components/ui/product/ProductGrid";
 import dynamic from "next/dynamic";
+import type { Metadata } from "next";
 // import { ProductGallery } from "@/components/ui/product/ProductGallery";
 // import { ProductInfo } from "@/components/ui/product/ProductInfo";
 
@@ -20,6 +21,27 @@ const ProductInfo = dynamic(() =>
 
 interface ProductPageProps {
   params: Promise<{ handle: string }>;
+}
+
+export async function generateMetadata({ params }: ProductPageProps): Promise<Metadata> {
+  const { handle } = await params;
+  const product = await getProductByHandle(handle);
+
+  if (!product) {
+    return {
+      title: 'Product Not Found',
+    };
+  }
+
+  return {
+    title: product.title,
+    description: product.description || `Shop ${product.title} at MeriStore.`,
+    openGraph: {
+      title: product.title,
+      description: product.description,
+      images: product.images[0] ? [{ url: product.images[0].url }] : [],
+    },
+  };
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
