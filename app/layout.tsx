@@ -14,9 +14,23 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// export const metadata: Metadata = {
+//   title: "Meri Store",
+//   description: "An E-commerce website",
+// };
 export const metadata: Metadata = {
-  title: "Meri Store",
-  description: "An E-commerce website",
+  title: {
+    default: "MeriStore — Merch Store",
+    template: "%s | MeriStore",
+  },
+  description:
+    "Shop MeriStore for snowboards, apparel, and accessories. Browse our full catalog, filter by price and availability, and check out securely.",
+  keywords: ["merch store", "snowboards", "apparel", "ecommerce"],
+  openGraph: {
+    title: "MeriStore",
+    description: "Shop MeriStore for snowboards, apparel, and accessories.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
