@@ -19,6 +19,7 @@ const geistMono = Geist_Mono({
 //   description: "An E-commerce website",
 // };
 export const metadata: Metadata = {
+  metadataBase: new URL("https://meri-store-nine.vercel.app"),
   title: {
     default: "MeriStore — Merch Store",
     template: "%s | MeriStore",
