@@ -5,6 +5,7 @@ import { VariantSelector } from "./VariantSelector";
 import { ProductDetail, ProductVariant } from "@/services/products";
 import { Button } from "../button";
 import { useCart } from "@/context/CartContext";
+import BackButton from "@/components/ui/product/BackButton";
 
 interface ProductInfoProps {
   product: ProductDetail;
@@ -30,6 +31,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
   return (
     <div>
+        <BackButton />
       <h1 className="text-2xl font-bold text-gray-900">{product.title}</h1>
 
       {displayPrice && (
