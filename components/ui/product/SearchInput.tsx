@@ -13,19 +13,45 @@ export function SearchInput() {
   const [search, setSearch] = useState(searchParams.get("q") ?? "");
   const debouncedSearch = useDebounce(search, 400);
 
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
+//   useEffect(() => {
+//     if (isFirstRender.current) {
+//         isFirstRender.current = false;
+//         return;
+//     }
+    
+//     const params = new URLSearchParams(searchParams.toString());
 
-    if (debouncedSearch) {
-      params.set("q", debouncedSearch);
-    } else {
-      params.delete("q");
-    }
+//     if (debouncedSearch) {
+//       params.set("q", debouncedSearch);
+//     } else {
+//       params.delete("q");
+//     }
 
-    params.delete("after"); // reset pagination on new search
+//     params.delete("after"); // reset pagination on new search
 
-    router.push(`${pathname}?${params.toString()}`);
-  }, [debouncedSearch]);
+//     router.push(`${pathname}?${params.toString()}`);
+//   }, [debouncedSearch]);
+
+ useEffect(() => {
+   const currentQ = searchParams.get("q") ?? "";
+
+   // Only push if the debounced value is actually different from the URL's current value
+   if (debouncedSearch === currentQ) {
+     return;
+   }
+
+   const params = new URLSearchParams(searchParams.toString());
+
+   if (debouncedSearch) {
+     params.set("q", debouncedSearch);
+   } else {
+     params.delete("q");
+   }
+
+   params.delete("after");
+
+   router.push(`${pathname}?${params.toString()}`);
+ }, [debouncedSearch]);
 
   return (
     <Input
