@@ -6,6 +6,7 @@ import {
 import { ProductGrid } from "@/components/ui/product/ProductGrid";
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
+import BackButton from "@/components/ui/product/BackButton";
 // import { ProductGallery } from "@/components/ui/product/ProductGallery";
 // import { ProductInfo } from "@/components/ui/product/ProductInfo";
 
@@ -56,7 +57,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const recommendations = await getProductRecommendations(product.id);
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 py-24">
+      <BackButton />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         <ProductGallery images={product.images} productTitle={product.title} />
         <ProductInfo product={product} />

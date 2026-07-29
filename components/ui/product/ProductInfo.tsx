@@ -31,7 +31,7 @@ export function ProductInfo({ product }: ProductInfoProps) {
 
   return (
     <div>
-        <BackButton />
+      {/* <BackButton /> */}
       <h1 className="text-2xl font-bold text-gray-900">{product.title}</h1>
 
       {displayPrice && (
