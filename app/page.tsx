@@ -59,9 +59,9 @@ export default async function HomePage({ searchParams }: HomePageProps) {
     .join("&");
 
   return (
-    <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main className="max-w-7xl mx-auto px-4 sm:px-6 pt-24 pb-10">
       <div className="flex flex-col gap-4 mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">All Products</h1>
+        <h1 className="text-2xl font-bold">All Products</h1>
         <div className="flex flex-wrap items-center gap-3">
           <SearchInput />
           <SortSelect />
@@ -78,7 +78,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         <div className="mt-10 text-center">
           <Link
             href={`/?after=${pageInfo.endCursor}${paginationQuery ? `&${paginationQuery}` : ""}`}
-            className="inline-block px-6 py-3 border border-gray-300 rounded-md text-sm font-medium hover:bg-gray-50"
+            className="inline-block px-6 py-2 border border-gray-300 rounded-md text-base font-medium bg-[#111827] text-white"
           >
             Load More
           </Link>

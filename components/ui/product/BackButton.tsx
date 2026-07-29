@@ -7,9 +7,9 @@ import { IoMdArrowBack } from "react-icons/io";
 const BackButton = () => {
     const router = useRouter();
   return (
-    <Button variant="ghost" onClick={() => router.back()} className="mb-4">
+    <Button variant="ghost" onClick={() => router.back()} className="mb-4 text-base italic cursor-pointer text-[#111827] hover:bg-transparent">
       <IoMdArrowBack />
-      Back
+      Go Back
     </Button>
   );
 }
