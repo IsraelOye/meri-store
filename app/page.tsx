@@ -78,7 +78,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
         <div className="mt-10 text-center">
           <Link
             href={`/?after=${pageInfo.endCursor}${paginationQuery ? `&${paginationQuery}` : ""}`}
-            className="inline-block px-6 py-2 border border-gray-300 rounded-md text-base font-medium bg-[#111827] text-white"
+            className="inline-block px-6 py-2 border border-gray-300 rounded-md text-base font-medium bg-[#1E293B] text-white"
           >
             Load More
           </Link>
