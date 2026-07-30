@@ -14,7 +14,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-1">
           <Image
-            src="/logo/Logo.png"
+            src="/logo.png"
             alt="MeriStore logo"
             width={50}
             height={50}
