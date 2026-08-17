@@ -1,4 +1,4 @@
-import { getCollections, getProducts } from "@/services/products";
+import { getCollections, getProductsByCollection, getProducts } from "@/services/products";
 import { ProductGrid } from "@/components/ui/product/ProductGrid";
 import Link from "next/link";
 import BackButton from "@/components/ui/product/BackButton";
@@ -26,7 +26,7 @@ export default async function HomePage({ searchParams }: HomePageProps) {
 
   const queryParts: string[] = [];
   if (q) queryParts.push(`title:*${q}*`);
-  if (collection) queryParts.push(`collection:${collection}`);
+  // if (collection) queryParts.push(`collection:${collection}`);
   if (available === "true") queryParts.push(`available_for_sale:true`);
   if (minPrice) queryParts.push(`variants.price:>=${minPrice}`);
   if (maxPrice) queryParts.push(`variants.price:<=${maxPrice}`);
@@ -36,14 +36,31 @@ export default async function HomePage({ searchParams }: HomePageProps) {
   const [sortKey, reverseStr] = (sort ?? "RELEVANCE-false").split("-");
   const reverse = reverseStr === "true";
 
+  // const [{ products, pageInfo }, collections] = await Promise.all([
+  //   getProducts({
+  //     first: 12,
+  //     after,
+  //     query: shopifyQuery,
+  //     sortKey: sortKey as "RELEVANCE" | "PRICE" | "CREATED_AT" | "BEST_SELLING",
+  //     reverse,
+  //   }),
+  //   getCollections(),
+  // ]);
+
   const [{ products, pageInfo }, collections] = await Promise.all([
-    getProducts({
-      first: 12,
-      after,
-      query: shopifyQuery,
-      sortKey: sortKey as "RELEVANCE" | "PRICE" | "CREATED_AT" | "BEST_SELLING",
-      reverse,
-    }),
+    collection
+      ? getProductsByCollection({ first: 12, after, handle: collection })
+      : getProducts({
+          first: 12,
+          after,
+          query: shopifyQuery, // now built WITHOUT the collection: part
+          sortKey: sortKey as
+            | "RELEVANCE"
+            | "PRICE"
+            | "CREATED_AT"
+            | "BEST_SELLING",
+          reverse,
+        }),
     getCollections(),
   ]);
 

@@ -1,5 +1,5 @@
 import { shopifyFetch } from "@/lib/shopify/client";
-import { PRODUCTS_QUERY, COLLECTIONS_QUERY, PRODUCT_BY_HANDLE_QUERY, PRODUCT_RECOMMENDATIONS_QUERY } from "@/lib/shopify/queries";
+import { PRODUCTS_QUERY, COLLECTIONS_QUERY, PRODUCT_BY_HANDLE_QUERY, PRODUCT_RECOMMENDATIONS_QUERY, PRODUCTS_BY_COLLECTION_QUERY } from "@/lib/shopify/queries";
 
 export interface Product {
   id: string;
@@ -147,4 +147,41 @@ export async function getProductRecommendations(productId: string) {
   });
 
   return data.productRecommendations;
+}
+
+interface ProductsByCollectionResponse {
+  collection: {
+    products: {
+      edges: { node: Product }[];
+      pageInfo: { hasNextPage: boolean; endCursor: string | null };
+    };
+  } | null;
+}
+
+export async function getProductsByCollection({
+  handle,
+  first = 12,
+  after,
+  sortKey = 'RELEVANCE',
+  reverse = false,
+}: {
+  handle: string;
+  first?: number;
+  after?: string;
+  sortKey?: string;
+  reverse?: boolean;
+}) {
+  const data = await shopifyFetch<ProductsByCollectionResponse>({
+    query: PRODUCTS_BY_COLLECTION_QUERY,
+    variables: { handle, first, after, sortKey, reverse },
+  });
+
+  if (!data.collection) {
+    return { products: [], pageInfo: { hasNextPage: false, endCursor: null } };
+  }
+
+  return {
+    products: data.collection.products.edges.map((edge) => edge.node),
+    pageInfo: data.collection.products.pageInfo,
+  };
 }
