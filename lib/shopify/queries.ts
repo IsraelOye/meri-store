@@ -223,3 +223,39 @@ export const CART_LINES_REMOVE_MUTATION = `
     }
   }
 `;
+
+export const PRODUCTS_BY_COLLECTION_QUERY = `
+  query GetProductsByCollection(
+    $handle: String!
+    $first: Int!
+    $after: String
+    $sortKey: ProductCollectionSortKeys
+    $reverse: Boolean
+  ) {
+    collection(handle: $handle) {
+      products(first: $first, after: $after, sortKey: $sortKey, reverse: $reverse) {
+        edges {
+          node {
+            id
+            handle
+            title
+            featuredImage {
+              url
+              altText
+            }
+            priceRange {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+        pageInfo {
+          hasNextPage
+          endCursor
+        }
+      }
+    }
+  }
+`;
