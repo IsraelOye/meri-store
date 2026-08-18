@@ -133,6 +133,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/button";
+import BackButton from "@/components/ui/product/BackButton";
 
 export default function CartPage() {
   const { cart, loading, error, updateQuantity, removeItem, updatingLines } =
@@ -259,6 +260,9 @@ export default function CartPage() {
       <Button asChild size="lg" className="mt-6 w-full">
         <a href={cart.checkoutUrl}>Proceed to Checkout</a>
       </Button>
+      <div className="flex justify-center mt-3">
+        <BackButton text="Back to Product" />
+      </div>
     </main>
   );
 }

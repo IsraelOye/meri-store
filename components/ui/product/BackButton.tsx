@@ -1,16 +1,26 @@
-'use client';
+"use client";
 
-import { useRouter } from 'next/navigation';
-import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import { IoMdArrowBack } from "react-icons/io";
 
-const BackButton = () => {
-    const router = useRouter();
+interface BackButtonProps {
+  text?: string;
+}
+
+const BackButton = ({ text = "Go Back" }: BackButtonProps) => {
+  const router = useRouter();
+
   return (
-    <Button variant="ghost" onClick={() => router.back()} className="mb-4 text-base italic cursor-pointer text-[#111827] hover:bg-transparent">
+    <Button
+      variant="ghost"
+      onClick={() => router.back()}
+      className="mb-4 text-base italic cursor-pointer text-[#111827] hover:bg-transparent"
+    >
       <IoMdArrowBack />
-      Go Back
+      {text}
     </Button>
   );
-}
-export default BackButton
+};
+
+export default BackButton;
