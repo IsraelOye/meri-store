@@ -11,7 +11,7 @@ export function ProductCard({ product }: ProductCardProps) {
     const currency = product.priceRange.minVariantPrice.currencyCode;
   return (
     <Link href={`/products/${product.handle}`} className="group block">
-      <div className="aspect-square relative bg-gray-100 rounded-lg overflow-hidden">
+      <div className="aspect-square relative bg-white rounded-lg overflow-hidden shadow-sm">
         {product.featuredImage ? (
           <Image
             src={product.featuredImage.url}
