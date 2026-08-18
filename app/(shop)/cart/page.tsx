@@ -165,7 +165,7 @@ export default function CartPage() {
   }
 
   return (
-    <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+    <main className="max-w-3xl mx-auto px-4 sm:px-6 pt-24 pb-10">
       <h1 className="text-2xl font-bold text-gray-900 mb-6">Your Cart</h1>
 
       {error && <p className="mb-4 text-sm text-red-600">{error}</p>}
@@ -176,7 +176,7 @@ export default function CartPage() {
 
           return (
             <div key={line.id} className="py-4 flex gap-4">
-              <div className="w-20 h-20 relative bg-gray-100 rounded-md overflow-hidden shrink-0">
+              <div className="w-20 h-20 relative bg-[#F3EEE5] rounded-md overflow-hidden shrink-0">
                 {line.merchandise.product.featuredImage ? (
                   <Image
                     src={line.merchandise.product.featuredImage.url}

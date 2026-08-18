@@ -59,7 +59,7 @@ export function SearchInput() {
       placeholder="Search products..."
       value={search}
       onChange={(e) => setSearch(e.target.value)}
-      className="max-w-sm"
+      className="max-w-sm focus-visible:border-none focus-visible:ring-1 focus-visible:ring-gray-400"
     />
   );
 }
