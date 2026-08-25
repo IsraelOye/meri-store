@@ -6,8 +6,11 @@ import { useCart } from "@/context/CartContext";
 import Image from "next/image";
 
 export function Header() {
-  const { cart } = useCart();
-  const itemCount = cart?.totalQuantity ?? 0;
+  // const { cart } = useCart();
+  // const itemCount = cart?.totalQuantity ?? 0;
+
+  const { totalQuantity } = useCart();
+  const itemCount = totalQuantity;
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-3xl shadow-lg">
