@@ -462,7 +462,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setCheckingOut(false);
         return;
       }
-
+      setCheckingOut(false);
       window.location.href = cart.checkoutUrl;
     } catch (err) {
       setCheckingOut(false);
