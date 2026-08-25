@@ -348,7 +348,7 @@ import {
   ReactNode,
 } from "react";
 import { createCart, getCart } from "@/services/cart";
-import { LocalCartLine } from "@/types/localCart";
+import { LocalCartLine } from "@/types/localcart";
 
 const LOCAL_CART_KEY = "meristore_local_cart";
 
